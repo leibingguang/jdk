@@ -8,7 +8,7 @@ import org.apache.kafka.common.TopicPartition;
 
 import java.util.*;
 
-public class KafkaRebalanceDemo {
+public class KafkaConsumerRebalanceDemo {
 
     private static Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
 
@@ -41,7 +41,6 @@ public class KafkaRebalanceDemo {
                 consumer.commitAsync();
             }
         } finally {
-            //同步提交
             try {
                 consumer.commitSync();
             } finally {
