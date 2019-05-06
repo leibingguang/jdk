@@ -1,19 +1,16 @@
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class T {
     public static void main(String[] args) {
-        List<String> list  =   new  ArrayList<String>();
-        list.add("aaa");
-        list.add("bbb");
-        list.add("aaa");
-        list.add("aba");
-        list.add("aaa");
 
-        list = new ArrayList(new HashSet(list));
-
-        System.out.println( "去重后的集合： " + list);
-
+        CharBuffer charBuffer = CharBuffer.wrap("abcdefg", 3, 5);
+        for(int i=0; i< charBuffer.limit(); i++)
+        {
+            System.out.println(charBuffer.get(i));
+        }
+        charBuffer.append("aa");
     }
 }

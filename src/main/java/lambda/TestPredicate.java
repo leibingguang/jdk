@@ -13,9 +13,9 @@ public class TestPredicate {
 
 
         checkAndExecute(personList, person -> person.getFirstName().startsWith("L"), (person) -> System.out.println(person));
-//ÒÔÏÂ´úÂëÎªÊ¹ÓÃstreamÁ÷È¡´ú¾²Ì¬º¯Êý
+//ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½ÎªÊ¹ï¿½ï¿½streamï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
         personList.stream().filter(person -> person.getFirstName().startsWith("L")).forEach(person -> System.out.println(person));
-        //Á½¸ö::±íÊ¾Method reference Ê¹ÓÃ±ðÈËÒÑ¾­Ð´ºÃµÄObject/ClassµÄmethodÀ´Ìæ´úlambda expression
+        //ï¿½ï¿½ï¿½ï¿½::ï¿½ï¿½Ê¾Method reference Ê¹ï¿½Ã±ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½Ð´ï¿½Ãµï¿½Object/Classï¿½ï¿½methodï¿½ï¿½ï¿½ï¿½ï¿½lambda expression
         personList.stream().filter(person -> person.getFirstName().startsWith("L")).forEach(System.out::println);
     }
 
@@ -26,7 +26,7 @@ public class TestPredicate {
                 consumer.accept(person);
             }
         }
-//¶ÔforÑ­»·¼ò»¯ºóµÄ´úÂë
+//ï¿½ï¿½forÑ­ï¿½ï¿½ï¿½ò»¯ºï¿½Ä´ï¿½ï¿½ï¿½
         personList.forEach(person -> {
             if (predicate.test(person)) {
                 consumer.accept(person);
