@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 
 public class TestBloomFilter {
     public static void main(String[] args) {
+        BloomFilter<String> dealIdBloomFilter = BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), 1000);
 
         for (int i = 0; i < 1000; i++) {
             dealIdBloomFilter.put(String.valueOf(i));
@@ -19,7 +20,6 @@ public class TestBloomFilter {
                 break;
             }
         }
-        dealIdBloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), 1000);
 
         boolean isContained = dealIdBloomFilter.mightContain(String.valueOf(1052));
 
@@ -27,15 +27,15 @@ public class TestBloomFilter {
 
     }
 
-    private static BloomFilter<String> dealIdBloomFilter = BloomFilter.create(new Funnel<String>() {
-
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public void funnel(String arg0, PrimitiveSink arg1) {
-
-            arg1.putString(arg0, Charsets.UTF_8);
-        }
-
-    }, 1000);
+//    private static BloomFilter<String> dealIdBloomFilter = BloomFilter.create(new Funnel<String>() {
+//
+//        private static final long serialVersionUID = 1L;
+//
+//        @Override
+//        public void funnel(String arg0, PrimitiveSink arg1) {
+//
+//            arg1.putString(arg0, Charsets.UTF_8);
+//        }
+//
+//    }, 1000);
 }

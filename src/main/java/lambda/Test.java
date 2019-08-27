@@ -21,4 +21,18 @@ public class Test {
             }
         }
     }
+
+    @org.junit.Test
+    public void testLamdba()
+    {
+        t(person -> {
+            System.out.println(person);
+            return true;
+        });
+    }
+
+    public void t(NameChecker nameChecker)
+    {
+        nameChecker.check(new Person("name"));
+    }
 }
