@@ -6,10 +6,14 @@ import stream.entity.Dish.CaloricLevel;
 import stream.entity.Dish.Type;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.*;
 
 /**
  * 分组
@@ -53,6 +57,9 @@ public class GroupingbyDemo {
         System.out.println(dishesByCaloricLevel);
     }
 
+    /**
+     * 先按类型，再按热量分组
+     */
     @Test
     public void dishByTypeCaloricLevel() {
         Map<Type, Map<CaloricLevel, List<Dish>>> dishByTypeCaloricLevel
@@ -68,4 +75,42 @@ public class GroupingbyDemo {
         System.out.println(dishByTypeCaloricLevel);
     }
 
+    /**
+     * 获取每个分类最高热量的食物
+     */
+    @Test
+    public void mostCaloricByType() {
+        Map<Type, Dish> mostCaloricByType = menu.stream().collect(
+                groupingBy(Dish::getType,//分类函数
+                        collectingAndThen(//第二级收集器
+                                maxBy(comparing(Dish::getCalories)),//包装后的收集器
+                                Optional::get))//转换函数
+        );
+        System.out.println(mostCaloricByType);
+    }
+
+    /**
+     * 每种类型的总热量
+     */
+    @Test
+    public void totalCaloricByType() {
+        Map<Type, Integer> totalCaloricByType
+                = menu.stream().collect(groupingBy(Dish::getType, summingInt(Dish::getCalories)));
+    }
+
+    /**
+     * 每种类型，有哪些CaloricLevel
+     */
+    @Test
+    public void caloricLevelsByType() {
+        Map<Type, Set<CaloricLevel>> caloricLevelsByType = menu.stream().collect(groupingBy(Dish::getType, mapping(dish -> {
+            if (dish.getCalories() <= 400)
+                return CaloricLevel.DIET;
+            else if (dish.getCalories() <= 700)
+                return CaloricLevel.NORMAL;
+            else
+                return CaloricLevel.FAT;
+        }, toSet())));
+        System.out.println(caloricLevelsByType);
+    }
 }
