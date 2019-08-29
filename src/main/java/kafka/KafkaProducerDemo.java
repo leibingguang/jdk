@@ -22,7 +22,7 @@ public class KafkaProducerDemo {
 //        properties.setProperty("request.timeout.ms", "1000");
 //        properties.setProperty("metadata.fetch..timeout.ms", "1000");
 
-        ProducerRecord<String, String> record = new ProducerRecord<String, String>(TEST_TOPIC, "test","test");
+        ProducerRecord<String, String> record = new ProducerRecord<String, String>(KafkaConstants.TOPIC, "test","test");
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer(properties);
 
         try {
