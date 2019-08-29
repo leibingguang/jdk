@@ -19,10 +19,22 @@ import java.time.ZonedDateTime;
 import java.time.chrono.MinguoDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalField;
 
 public class LocalDateDemo {
+    /**
+     * 获取当前日期，默认为系统时区，可通过Clock/ZoneId指定时区
+     */
+    @Test
+    public void now() {
+        System.out.println(LocalDate.now());
+        //获取特定时区的日期
+        System.out.println(LocalDate.now(ZoneId.of(ZoneId.SHORT_IDS.get("HST"))));
+        System.out.println(LocalDate.now(Clock.system(ZoneId.of(ZoneId.SHORT_IDS.get("HST")))));
+    }
 
     /**
      * 创建LocalDate的不同方式
@@ -131,5 +143,36 @@ public class LocalDateDemo {
          * 判断是否闰年
          */
         boolean validLeapYear = Year.of(2012).isLeap();
+    }
+
+    /**
+     * 纪元时间（1970.1.1）+指定天数
+     */
+    @Test
+    public void ofEpochDay() {
+        System.out.println(LocalDate.ofEpochDay(365));
+    }
+
+    /**
+     * 获取指定Field的范围
+     */
+    @Test
+    public void range() {
+        System.out.println(LocalDate.of(2019, 1, 1).range(ChronoField.YEAR_OF_ERA));
+    }
+
+    /**
+     * 获取此日期的时间顺序，即ISO日历系统
+     */
+    @Test
+    public void getChronology() {
+        System.out.println(LocalDate.of(2019, 1, 1).getChronology());
+    }
+
+    @Test
+    public void getEra()
+    {
+        System.out.println(LocalDate.of(2019, 1, 1).getEra());
+
     }
 }

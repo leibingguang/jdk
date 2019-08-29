@@ -16,6 +16,7 @@ public class TimeTest {
      */
     @Test
     public void daysOfMonth() {
+
         Stream.of(Month.values())
                 .map(month -> LocalDate.of(2019, month, 1))
                 .forEach(localDate -> {
@@ -48,7 +49,7 @@ public class TimeTest {
 
         LocalDate date = Year.now().atMonth(m).atDay(day);
         // 使用查询方式来处理是最方便的
-        Boolean query = date.query(temporal -> {
+        boolean query = date.query(temporal -> {
             int dom = temporal.get(ChronoField.DAY_OF_MONTH);
             int dow = temporal.get(ChronoField.DAY_OF_WEEK);
             return dom == 13 && dow == 5;
