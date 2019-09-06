@@ -9,7 +9,7 @@ public class Test13_16 {
         RandomAccessFile fileA = new RandomAccessFile(Constants.FILE_PATH, "rw");
         FileChannel fileChannelA = fileA.getChannel();
         fileChannelA.lock(1, 2, false);
-////        fileChannelA.lock();
+////        fileChannelA.concurrent();
         System.out.println("1111");
         Thread.sleep(Long.MAX_VALUE);
         System.out.println("2222");
