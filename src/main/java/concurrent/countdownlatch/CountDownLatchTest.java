@@ -14,10 +14,12 @@ public class CountDownLatchTest {
             new Thread(() -> {
                 try {
                     countDownLatch.await();
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }).start();
+
         }
         Thread.sleep(1000);
         for (int i = 0; i < 10; i++) {
